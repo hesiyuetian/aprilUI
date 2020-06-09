@@ -1,0 +1,16 @@
+.april-picker-colum{
+  flex: 1;
+  font-size: 14px;
+  overflow: hidden;
+  &-item{
+    font-weight: 400;
+    font-size: 14px;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+  }
+  &-active{
+    font-weight: 600;
+    color: #323233;
+  }
+}

@@ -1,0 +1,72 @@
+@charset "utf-8";
+//@import "./icon/iconfont";
+
+@font-face {
+  font-family: 'iconfont';  /* project id 1870859 */
+  src: url('//at.alicdn.com/t/font_1870859_upcvcauwp8.eot');
+  src: url('//at.alicdn.com/t/font_1870859_upcvcauwp8.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1870859_upcvcauwp8.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1870859_upcvcauwp8.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1870859_upcvcauwp8.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1870859_upcvcauwp8.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/*  定义字体权重 */
+.april-f-fw1 {
+  font-weight: 100 !important;
+}
+.april-f-fw2 {
+  font-weight: 200 !important;
+}
+.april-f-fw3 {
+  font-weight: 300 !important;
+}
+.april-f-fw4 {
+  font-weight: 400 !important;
+}
+.april-f-fw5 {
+  font-weight: 600 !important;
+}
+.april-f-fw6 {
+  font-weight: 600 !important;
+}
+.april-f-fw7 {
+  font-weight: 700 !important;
+}
+.april-f-fw8 {
+  font-weight: 800 !important;
+}
+
+
+/*  定义字体相关样式 */
+.april-f-tal {
+  text-align: left;
+}
+
+.april-f-tac {
+  text-align: center;
+}
+
+.april-f-tar {
+  text-align: right;
+}
+
+/********鼠标**********/
+.april-f-cursor-not {
+  cursor: not-allowed;
+}
+
+.april-f-cursor {
+  cursor: pointer;
+}
+
+
+
