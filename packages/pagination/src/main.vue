@@ -44,7 +44,7 @@
         public pageSize!: number;
 
         // 总条目数
-        @Prop({default: 1, type: Number})
+        @Prop({default: 1})
         public total!: number;
 
         // 分页器展示的方向
@@ -74,6 +74,7 @@
 
         @Watch("currentPages", { immediate:true, deep: true})
         watchCurrentPages(): void {
+            if(!this.currentPages) return;
             this.changeCurrentPage = this.currentPage = this.currentPages;
             this.init();
         }
@@ -81,6 +82,11 @@
         @Watch("pageSize", { immediate:true, deep: true})
         watchPageSize(): void {
             this.pageSizes = Number(this.pageSize);
+            this.init()
+        }
+
+        @Watch("total", { immediate:true, deep: true})
+        watchTotal(): void {
             this.init()
         }
 

@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-    import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
+    import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
     import { pickerColumModules } from '../interface'
     @Component
     export default class AprilPickerColum extends Vue {
@@ -45,9 +45,20 @@
         private currentIndex: number = 0;
         private duration: number = 0;
 
+        // get currentIndex(){
+        //     return this.defaultIndex;
+        // }
+
         created(){
             this.setIndex(this.defaultIndex)
         }
+
+        @Watch("defaultIndex")
+        changeDefaultIndex(){
+            this.currentIndex = this.defaultIndex;
+            this.setIndex(this.defaultIndex)
+        }
+
 
         /**
          * Touch Move Start

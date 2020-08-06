@@ -3,12 +3,12 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 1870859 */
-  src: url('//at.alicdn.com/t/font_1870859_upcvcauwp8.eot');
-  src: url('//at.alicdn.com/t/font_1870859_upcvcauwp8.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1870859_upcvcauwp8.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1870859_upcvcauwp8.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1870859_upcvcauwp8.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1870859_upcvcauwp8.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1870859_kadxgg9nijm.eot');
+  src: url('//at.alicdn.com/t/font_1870859_kadxgg9nijm.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1870859_kadxgg9nijm.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1870859_kadxgg9nijm.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1870859_kadxgg9nijm.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1870859_kadxgg9nijm.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -45,6 +45,27 @@
   font-weight: 800 !important;
 }
 
+.april-f-center-x{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%)
+}
+.april-f-center-y{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%)
+}
+.april-f-center{
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.april-f-common-color{
+  color: rgba(0, 0, 0, 0.65) !important;
+}
+
 
 /*  定义字体相关样式 */
 .april-f-tal {
@@ -66,6 +87,38 @@
 
 .april-f-cursor {
   cursor: pointer;
+}
+
+
+.april-f-pf{position: fixed}
+.april-f-pr{position: relative}
+.april-f-pa{position: absolute}
+
+
+/*******form***********/
+.april-input:focus{
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(24,144,255,.2);
+}
+.april-input:focus, .april-input:hover{
+  border-color: #40a9ff;
+  border-right-width: 1px!important;
+}
+.april-input-disable{
+  cursor: not-allowed;
+}
+.april-has-error{
+  border-color: #f5222d;
+}
+
+/*******model***********/
+.april-model-show{
+  opacity: 1 !important;
+  animation: april-model-show 0.5s linear;
+}
+.april-model-close{
+  opacity: 0 !important;
+  animation: april-model-close 0.5s linear;
 }
 
 

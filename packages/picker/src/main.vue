@@ -17,8 +17,6 @@
             <div class="april-picker-mask" :style="{'background-size': '100% '+ (itemHeight * (visibleItemCount - 1)) / 2 +'px'}"></div>
             <div class="april-picker-frame" :style="{'height': itemHeight+'px'}"></div>
         </div>
-
-
     </div>
 </template>
 
@@ -55,7 +53,7 @@
         @Prop({ default: 5, type: Number })
         public visibleItemCount!: number;
 
-        // 选择器的标题
+        // 选择器的标题文字颜色
         @Prop({default: '#323233', type: String})
         private titleColor!: string;
 
@@ -67,7 +65,7 @@
         @Prop({default: '确认', type: String})
         private confirmText!: string;
 
-        // 选择器的标题文字颜色
+        // 选择器的标题
         @Prop({default: '', type: String})
         private title!: string;
 

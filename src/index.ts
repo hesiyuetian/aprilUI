@@ -1,10 +1,25 @@
 import Vue from 'vue';
+
 import AprilPicker from '../packages/picker';
 import AprilPagination from '../packages/pagination';
 
+// 弹框
+import {AprilModelCenter, AprilModelRight} from '../packages/model';
+
+// 表单
+import {AprilForm, AprilFormItem} from '../packages/form';
+import AprilInput from '../packages/input';
+import AprilSelect from '../packages/select';
+
 const components: { [propsName: string]: any } = {
     AprilPicker,
-    AprilPagination
+    AprilPagination,
+    AprilModelCenter,
+    AprilModelRight,
+    AprilForm,
+    AprilFormItem,
+    AprilInput,
+    AprilSelect
 };
 
 const install = (vue: typeof Vue): void => {
