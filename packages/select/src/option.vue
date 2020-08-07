@@ -1,10 +1,11 @@
 <template>
     <div class="april-select-option" v-if="visible">
-        <ul class="april-select-c" :style="{'width': option.width + 'px', 'top': option.top+'px', 'left': option.left+'px'}">
-            <li  @click.stop="set()" v-if="isShowDefalut">
+        <ul class="april-select-c" :style="{'width': option.width + 'px', 'top': option.top+'px', 'left': option.left+'px', 'background': selectBackgroundColor, 'color': selectColor}">
+            <li @click.stop="set()" v-if="isShowDefalut">
                 <span>{{defalutFont}}</span>
             </li>
-            <li :class="{'april-select-c-item-selected': value === item.value}" v-for="(item, index) in list" :key="index" @click.stop="set(item)">
+            <li
+                :class="{'april-select-c-item-selected': value === item.value}" v-for="(item, index) in list" :key="index" @click.stop="set(item)">
                 <span>{{item.name}}</span>
             </li>
         </ul>
@@ -27,11 +28,16 @@
 
         @Prop() public name!: any;
 
+
         // 是否可搜索 类型: Function
         @Prop({default: false, type: Boolean}) public filterable!: Boolean;
 
         @Prop({default: false, type: Boolean}) public isShowDefalut!: Boolean;
         @Prop({default: "请选择", type: String}) public defalutFont!: String;
+
+        @Prop({default: "rgba(0,0,0,.65)", type: String}) public selectColor!: String;
+        @Prop({default: "#fff", type: String}) public selectBackgroundColor!: String;
+        @Prop({default: "#bae7ff", type: String}) public activeBackgroundColor!: String;
 
         private option: object = {
             width: '',
@@ -50,6 +56,9 @@
                     body.appendChild(this.$el);
                 }
 
+                this.$on('hidden', (option:any) => {
+                    this.visible = false;
+                });
 
                 this.$on('show', (option:any) => {
                     body.addEventListener('click', (event:any) => {
@@ -72,110 +81,3 @@
         }
     }
 </script>
-
-<!--<style lang="scss" scoped>-->
-<!--    .april-select-option{-->
-<!--        position: absolute;-->
-<!--        top: 0;-->
-<!--        left: 0;-->
-<!--        width: 100%;-->
-<!--        .april-select-c{-->
-<!--            width: 100%;-->
-<!--            max-height: 240px;-->
-<!--            overflow-y: auto;-->
-<!--            left: 0;-->
-<!--            z-index: 9999;-->
-<!--            box-sizing: border-box;-->
-<!--            top: 44px;-->
-<!--            background-color: #fff;-->
-<!--            border-radius: 4px;-->
-<!--            outline: none;-->
-<!--            box-shadow: 0 2px 8px 4px rgba(0, 0, 0, 0.15);-->
-<!--            &-item-selected{-->
-<!--                background-color: #bae7ff;-->
-<!--            }-->
-<!--            li{-->
-<!--                text-indent: 12px;-->
-<!--                cursor: pointer;-->
-<!--                line-height: 30px;-->
-<!--                &:hover{-->
-<!--                    background-color: #bae7ff;-->
-<!--                }-->
-<!--            }-->
-<!--        }-->
-<!--    }-->
-<!--    .april-select{-->
-<!--        width: 100%;-->
-<!--        max-height: 200px;-->
-<!--        min-height: 40px;-->
-<!--        display: flex;-->
-<!--        font-size: 14px;-->
-<!--        z-index: 9;-->
-<!--        &-label{-->
-<!--            flex: 2;-->
-<!--            span{-->
-<!--                position: absolute;-->
-<!--                right: 0;-->
-<!--                i{-->
-<!--                    vertical-align: top;-->
-<!--                    font-size: 16px;-->
-<!--                }-->
-<!--            }-->
-<!--        }-->
-<!--        &-cont{-->
-<!--            flex: 4;-->
-<!--            input{-->
-<!--                width: 100%;-->
-<!--                height: 32px;-->
-<!--                border: 1px solid #d9d9d9;-->
-<!--                border-radius: 4px;-->
-<!--                padding: 4px 11px;-->
-<!--                box-sizing: border-box;-->
-<!--                text-indent: 2px;-->
-<!--                position: absolute;-->
-<!--                &:focus{-->
-<!--                    border-color: #40a9ff;-->
-<!--                }-->
-<!--            }-->
-<!--            input:disabled{-->
-<!--                border:1px solid #d9d9d9;-->
-<!--                background-color:#fff;-->
-<!--            }-->
-
-<!--            &-error{-->
-<!--                border-color: #f5222d !important;-->
-<!--            }-->
-<!--            &-tip{-->
-<!--                bottom: -20px;-->
-<!--                height: 22px;-->
-<!--                line-height: 22px;-->
-<!--                color: #f5222d;-->
-<!--                z-index: 9;-->
-<!--            }-->
-<!--        }-->
-<!--        &-c{-->
-<!--            width: 100%;-->
-<!--            max-height: 240px;-->
-<!--            overflow-y: auto;-->
-<!--            left: 0;-->
-<!--            z-index: 9999;-->
-<!--            box-sizing: border-box;-->
-<!--            top: 44px;-->
-<!--            background-color: #fff;-->
-<!--            border-radius: 4px;-->
-<!--            outline: none;-->
-<!--            box-shadow: 0 2px 8px 4px rgba(0, 0, 0, 0.15);-->
-<!--            &-item-selected{-->
-<!--                background-color: #bae7ff;-->
-<!--            }-->
-<!--            li{-->
-<!--                text-indent: 12px;-->
-<!--                cursor: pointer;-->
-<!--                line-height: 30px;-->
-<!--                &:hover{-->
-<!--                    background-color: #bae7ff;-->
-<!--                }-->
-<!--            }-->
-<!--        }-->
-<!--    }-->
-<!--</style>-->

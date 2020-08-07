@@ -13,4 +13,13 @@ export declare class AprilInput extends Vue {
 
     // 提示文案
     public placeholder: string;
+
+    // 字体颜色
+    public color: string;
+
+    // input背景颜色
+    public backgroundColor: string;
+
+    // 字体大小 不带单位
+    public fontSize: string;
 }

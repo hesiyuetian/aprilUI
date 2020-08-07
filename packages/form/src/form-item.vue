@@ -1,7 +1,7 @@
 <template>
     <div class="april-form-item">
-        <label v-if="label" :class="{'april-form-item-required': isRequired }" :style="{'flex': itemOption.label.flex}">
-            <span class="">{{ label }}：</span>
+        <label class="april-form-item-label" v-if="label"  :style="{'flex': itemOption.label.flex}">
+            <span :class="{'april-form-item-required': isRequired }">{{ label }}：</span>
         </label>
         <div class="april-form-item-wrapper" :style="{'flex': itemOption.wrapper.flex}">
             <slot></slot>
@@ -36,7 +36,7 @@
         },
         props: {
             label: {
-                type: String,
+                type: [String, Number],
             },
             prop: {
                 type: String,

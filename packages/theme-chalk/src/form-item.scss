@@ -1,4 +1,6 @@
 .april-form-item{
+  max-height: calc(100% - 22px);
+  min-height: 30px;
   width: 100%;
   margin: 0 0 22px;
   padding: 0;
@@ -11,9 +13,14 @@
   vertical-align: top;
   display: flex;
   label{
-    line-height: 40px;
+    height: 100%;
     white-space: nowrap;
     text-align: right;
+    display:table;
+    span{
+      display:table-cell;
+      vertical-align:middle;
+    }
   }
   &-required:before {
     content: '*';
@@ -21,11 +28,11 @@
   }
   &-wrapper{
     position: relative;
-    line-height: 40px;
     zoom: 1;
+    height: 100%;
     &-message{
       position: absolute;
-      bottom: -18px;
+      bottom: -22px;
       clear: both;
       min-height: 22px;
       margin-top: -2px;

@@ -1,16 +1,15 @@
 <template>
-    <span>
-        <input
-                class="april-input-item"
-                :class="[valida.validateState === 'error' && 'april-has-error', disable ? 'april-input-disable' : 'april-input' ]"
-                :type="type"
-                :placeholder="placeholder"
-                :readonly="disable"
-                :value="currentValue"
-                @input="handleInput"
-                @blur="handleBlur"
-        />
-    </span>
+    <input
+            class="april-input-item"
+            :class="[valida.validateState === 'error' && 'april-has-error', disable ? 'april-input-disable' : 'april-input' ]"
+            :style="{'font-size': fontSize+'px', 'color': color, 'background-color': backgroundColor}"
+            :type="type"
+            :placeholder="placeholder"
+            :readonly="disable"
+            :value="currentValue"
+            @input="handleInput"
+            @blur="handleBlur"
+    />
 </template>
 
 <script>
@@ -40,6 +39,18 @@
             disable: {
                 type: Boolean,
                 default: false
+            },
+            color: {
+                type: String,
+                default: 'rgba(0,0,0,.65)'
+            },
+            backgroundColor: {
+                type: String,
+                default: '#fff'
+            },
+            fontSize: {
+                type: [String, Number],
+                default: '14'
             }
         },
         watch: {
@@ -48,7 +59,6 @@
                     this.currentValue = val;
                 },
                 deep: true,
-                // 代表在wacth里声明了firstName这个方法之后立即先去执行handler方法
                 immediate: true
             }
         },
