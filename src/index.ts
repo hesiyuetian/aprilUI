@@ -3,6 +3,11 @@ import Vue from 'vue';
 import AprilPicker from '../packages/picker';
 import AprilPagination from '../packages/pagination';
 
+// 关闭 Vue warn
+Vue.config.warnHandler = function(msg, vm, trace) {
+
+};
+
 // 弹框
 import {AprilModelCenter, AprilModelRight} from '../packages/model';
 

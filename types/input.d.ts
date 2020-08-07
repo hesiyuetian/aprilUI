@@ -3,7 +3,7 @@ import Vue from 'vue';
 export declare class AprilInput extends Vue {
 
     // 当前输入值
-    public value: string | number;
+    public value: any;
 
     // input输入类型
     public type: string;

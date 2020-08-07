@@ -54,6 +54,11 @@
                 <april-form-item label="城市3" :item-option="itemOption">
                     <april-select v-model="formValidate.city" :filterable="1==1 && true" :filter-method="filterMethod" :list="cityList" />
                 </april-form-item>
+
+
+            </div>
+            <div>
+<!--                <april-input v-model="formValidate.phone" />-->
             </div>
             <div class='test-line'>
 
@@ -67,16 +72,16 @@
         <april-model-right :visible.sync="visible" @close="close">
             <template slot="content">
                 <div class="zhan-cont">
-                    <april-form-item label="城市" :item-option="itemOption">
-                        <april-select v-model="formValidate.city" :list="cityList" />
-                    </april-form-item>
+<!--                    <april-form-item label="城市" :item-option="itemOption">-->
+<!--                        <april-select v-model="formValidate.city" :list="cityList" />-->
+<!--                    </april-form-item>-->
                 </div>
             </template>
 
             <template slot="foot">
-                    <april-form-item label="城市" :item-option="itemOption">
-                        <april-select v-model="formValidate.city" :list="cityList" />
-                    </april-form-item>
+<!--                    <april-form-item label="城市" :item-option="itemOption">-->
+<!--                        <april-select v-model="formValidate.city" :list="cityList" />-->
+<!--                    </april-form-item>-->
             </template>
         </april-model-right>
     </div>
@@ -226,8 +231,8 @@
             })
         }
         handleReset () {
-            this.visible = true;
-            // this.$refs.form.resetFields();
+            // this.visible = true;
+            this.$refs.form.resetFields();
         }
         close(){
             this.visible = false

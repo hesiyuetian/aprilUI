@@ -4,65 +4,67 @@
     </form>
 </template>
 
-<script lang="ts">
-    import { Component, Vue, Prop } from "vue-property-decorator";
+<script>
     import Emitter from '../../../src/mixins/emitter';
-
-    @Component({
+    export default {
         name: 'april-form',
+        componentName: 'april-form',
         mixins: [Emitter],
         provide(){
             return {
                 form : this
             };
-        }
-    })
-    export default class AprilForm extends Vue{
-        public fields:Array<any> = [];
-
-        // 当前页码
-        @Prop({ type: Object})
-        public model!: Object;
-
-        // 当前页码
-        @Prop({ type: Object})
-        public rules!: Object;
-
+        },
+        data(){
+            return {
+                fields: []
+            }
+        },
+        props: {
+            model: {
+                type: Object,
+            },
+            rules: {
+                type: Object,
+            }
+        },
         created(){
-            this.$on('on-form-item-add', (field:any) => {
+            this.$on('on-form-item-add', (field) => {
                 if (field) this.fields.push(field);
             });
-            this.$on('on-form-item-remove', (field:any) => {
+            this.$on('on-form-item-remove', (field) => {
                 if (field.prop) this.fields.splice(this.fields.indexOf(field), 1);
             });
-        }
-
-        // 公开方法：全部重置数据
-        resetFields() {
-            this.fields.forEach(field => {
-                field.resetField();
-            });
-        }
-        // 公开方法：全部校验数据，支持 Promise
-        validate(callback:Function) {
-            return new Promise(resolve => {
-                let valid = true;
-                let count = 0;
+        },
+        methods: {
+            // 公开方法：全部重置数据
+            resetFields() {
                 this.fields.forEach(field => {
-                    field.validate('', (errors:any) => {
-                        if (errors) {
-                            valid = false;
-                        }
-                        if (++count === this.fields.length) {
-                            // 全部完成
-                            resolve(valid);
-                            if (typeof callback === 'function') {
-                                callback(valid);
+                    field.resetField();
+                });
+            },
+            // 公开方法：全部校验数据，支持 Promise
+            validate(callback) {
+                return new Promise(resolve => {
+                    let valid = true;
+                    let count = 0;
+                    this.fields.forEach(field => {
+                        field.validate('', (errors) => {
+                            if (errors) {
+                                valid = false;
                             }
-                        }
+                            if (++count === this.fields.length) {
+                                // 全部完成
+                                resolve(valid);
+                                if (typeof callback === 'function') {
+                                    callback(valid);
+                                }
+                            }
+                        });
                     });
                 });
-            });
-        }
+            }
+        },
+
     }
 </script>
