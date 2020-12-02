@@ -13,7 +13,10 @@
         <!--                   @comfirm="comfirm"-->
         <!--                   @change="change"-->
         <!--    />-->
-        <div @click="total = total + 12">修改total------{{total}}</div>
+        <div @click="total = total + 12">修改total------{{formValidate.cityId}}</div>
+        <april-input v-model="formValidate.name" font-size="20" color="#f00" height="80px" width="200px"/>
+<!--        <april-select v-model="formValidate.city" placeholder="请选择城市" :list="cityList" height="80px" width="200px"/>-->
+<!--        <april-select v-model="formValidate.city" :list="cityList" width="150px" height="40px" placeholder="请选择酒店" />-->
         <!--        <april-pagination-->
         <!--                :current-pages="currentPages"-->
         <!--                :page-size="pageSize"-->
@@ -34,7 +37,7 @@
 
         <april-form ref="form" :model="formValidate" :rules="ruleValidate">
             <div class='test-line' style="height: 100px">
-                <april-form-item label="用户名" prop="name" placeholder="请输入用户名" :item-option="itemOption">
+                <april-form-item label="用户名" prop="name" placeholder="请输入用户名" :item-option="itemOption" :tip-message="tipMessage">
                     <april-input v-model="formValidate.name" font-size="20" color="#f00" background-color="#eee"/>
                 </april-form-item>
                 <april-form-item label="邮箱" prop="mail" :item-option="itemOption">
@@ -45,40 +48,82 @@
                 </april-form-item>
             </div>
             <div class='test-line'>
-                <april-form-item label="城市1" :item-option="itemOption">
-                    <april-select v-model="formValidate.city" placeholder="请选择城市" :isShowDefalut="1==1 && true"
-                                  defalutFont="我是默认值" :list="cityList" select-background-color="#fff" select-color="#ff0" active-background-color="blue"/>
+                <april-form-item label="城市1" prop="city" :item-option="itemOption">
+                    <april-select v-model="formValidate.city" placeholder="请选择城市" :list="cityList"/>
                 </april-form-item>
-                <april-form-item label="城市2" :item-option="itemOption">
-                    <april-select v-model="formValidate.city" placeholder="请选择城市" :disable="1==1 && true"
-                                  :list="cityList"/>
+                <april-form-item label="城市1" prop="city" :item-option="itemOption">
+                    <april-select v-model="formValidate.city" placeholder="请选择城市" :list="cityList"/>
                 </april-form-item>
-                <april-form-item label="城市3" :item-option="itemOption">
-                    <april-select v-model="formValidate.city" :filterable="1==1 && true" :filter-method="filterMethod"
-                                  :list="cityList"/>
-                </april-form-item>
-            </div>
-            <div class='test-line' style="height: 62px">
-                <april-form-item label="城市1" :item-option="itemOption">
-                    <april-select v-model="formValidate.city" placeholder="请选择城市" :isShowDefalut="1==1 && true"
-                                  defalutFont="我是默认值" :list="cityList"/>
-                </april-form-item>
-            </div>
-            <div>
-                <!--                <april-input v-model="formValidate.phone" />-->
-            </div>
-            <div class='test-line'>
 
+<!--                <april-form-item label="城市1" :item-option="itemOption">-->
+<!--                    <april-select v-model="formValidate.city" placeholder="请选择城市" :isShowDefalut="1==1 && true"-->
+<!--                                  defalutFont="我是默认值" :list="cityList" select-background-color="#fff" select-color="#ff0" active-background-color="blue"/>-->
+<!--                </april-form-item>-->
+<!--                <april-form-item label="城市2" :item-option="itemOption">-->
+<!--                    <april-select v-model="formValidate.city" placeholder="请选择城市" :disable="1==1 && true"-->
+<!--                                  :list="cityList"/>-->
+<!--                </april-form-item>-->
+                <april-form-item label="城市3" :item-option="itemOption">
+                    <april-select v-model="formValidate.cityId" :filterable="1==1 && true"
+                                  :list="cityList"/>
+                </april-form-item>
+                <april-form-item label="起飞城市" prop="date" :item-option="itemOption">
+                    <april-date-picker v-model="formValidate.date" min-date="2020-06-23" max-date="2020-11-23" placeholder="请选择起飞城市" />
+                </april-form-item>
+
+<!--                <april-form-item label="城市3" :item-option="itemOption">-->
+<!--                    <april-select v-model="formValidate.city" :filterable="1==1 && true"-->
+<!--                                  :list="cityList"/>-->
+<!--                </april-form-item>-->
             </div>
+<!--            <div class='test-line' style="height: 62px">-->
+<!--                <april-form-item label="城市1" :item-option="itemOption">-->
+<!--                    <april-select v-model="formValidate.city" placeholder="请选择城市" :isShowDefalut="1==1 && true"-->
+<!--                                  defalutFont="我是默认值" :list="cityList"/>-->
+<!--                </april-form-item>-->
+<!--            </div>-->
         </april-form>
+
+
 
         <div @click="handleSubmit">提交</div>
         <div @click="handleReset">重置</div>
+
+<!--        <april-form ref="form" :model="formValidate" :rules="ruleValidate">-->
+<!--                <april-form-item label="用户名" prop="name" placeholder="请输入用户名" :item-option="itemOption">-->
+<!--                    <april-input v-model="formValidate.name" font-size="20" color="#f00" background-color="#eee"/>-->
+<!--                </april-form-item>-->
+<!--                <april-form-item label="邮箱" prop="mail" :item-option="itemOption">-->
+<!--                    <april-input v-model="formValidate.mail"/>-->
+<!--                </april-form-item>-->
+<!--                <april-form-item label="城市1" :item-option="itemOption">-->
+<!--                    <april-select v-model="formValidate.city" placeholder="请选择城市1212" :isShowDefalut="1==1 && true"-->
+<!--                                  defalutFont="我是默认值" :list="cityList" select-background-color="#fff" select-color="#ff0" active-background-color="blue"/>-->
+<!--                </april-form-item>-->
+<!--                <april-form-item label="城市2" :item-option="itemOption">-->
+<!--                    <april-select v-model="formValidate.city" placeholder="请选择城市" :disable="1==1 && true"-->
+<!--                                  :list="cityList"/>-->
+<!--                </april-form-item>-->
+<!--                <april-form-item label="城市3" :item-option="itemOption">-->
+<!--                    <april-select v-model="formValidate.city" :filterable="1==1 && true" :filter-method="filterMethod"-->
+<!--                                  :list="cityList"/>-->
+<!--                </april-form-item>-->
+<!--                <april-form-item label="城市1" :item-option="itemOption">-->
+<!--                    <april-select v-model="formValidate.city" placeholder="请选择城市" :isShowDefalut="1==1 && true"-->
+<!--                                  defalutFont="我是默认值" :list="cityList"/>-->
+<!--                </april-form-item>-->
+<!--            <div>-->
+<!--            </div>-->
+<!--            <div class='test-line'>-->
+
+<!--            </div>-->
+<!--        </april-form>-->
 
 
         <april-model-right :visible.sync="visible" @close="close">
             <template slot="content">
                 <div class="zhan-cont">
+
                     <!--                    <april-form-item label="城市" :item-option="itemOption">-->
                     <!--                        <april-select v-model="formValidate.city" :list="cityList" />-->
                     <!--                    </april-form-item>-->
@@ -96,6 +141,9 @@
 
 
 <script lang="ts">
+
+
+
     import {Component, Vue} from 'vue-property-decorator';
     import AprilPicker from "../packages/picker/src/main.vue";
     import AprilPagination from "../packages/pagination/src/main.vue";
@@ -103,6 +151,7 @@
     import AprilForm from "../packages/form/src/form.vue";
     import AprilFormItem from "../packages/form/src/form-item.vue";
     import AprilInput from "../packages/input/src/main.vue";
+    import AprilDatePicker from "../packages/date/src/main.vue";
     import AprilSelect from "../packages/select/src/main.vue";
     import AprilModelCenter from "../packages/model/src/center.vue";
     import AprilModelRight from "../packages/model/src/right.vue";
@@ -111,9 +160,11 @@
         components: {
             AprilModelRight,
             AprilPicker,
+            AprilDatePicker,
             AprilPagination,
             AprilForm, AprilFormItem, AprilInput, AprilSelect, AprilModelCenter
         },
+
     })
     export default class App extends Vue {
 
@@ -168,6 +219,8 @@
         public title: String = '摩登出行';
         private disable: Boolean = true;
 
+        private tipMessage: string = 'cron表达式网址：<a href="https://cron.qqe2.com/" target="_blank">https://cron.qqe2.com</a>';
+
 
         /**
          * april-pagination
@@ -185,26 +238,30 @@
          */
         visible: boolean = false;
         formValidate: object = {
-            name: '12312312',
+            name: '',
             mail: '163@163.com',
             phone: '19901708693',
-            city: 0,
-            cityId: 0,
+            city: 4,
+            cityId: 1,
+            date: '2020-09-23'
         };
         cityList: Array<any> = [
-            {name: '上海', value: 1},
-            {name: '北京', value: 2},
-            {name: '深圳', value: 3},
-            {name: '苏州', value: 4},
-            {name: '香港', value: 5},
+            // {name: '上海', value: 1},
+            // {name: '北京', value: 2},
+            // {name: '深圳', value: 3},
+            // {name: '苏州', value: 4},
+            // {name: '香港', value: 5},
         ];
         num: number = 7;
         ruleValidate: object = {
             name: [
                 {required: true, message: '用户名不能为空', trigger: 'blur'}
             ],
+            date: [
+                {required: true, message: '起飞城市不能为空', trigger: 'blur'}
+            ],
             city: [
-                {required: false, message: '请选择城市', trigger: 'blur'}
+                {type: "number", required: true, message: '请选择城市', trigger: 'change'}
             ],
             mail: [
                 {required: true, message: '邮箱不能为空', trigger: 'blur'},
@@ -226,17 +283,32 @@
             ],
         }
 
+        created(){
+            setTimeout(() => {
+                this.cityList = [
+                    {name: '上海', value: 1},
+                    {name: '北京', value: 2},
+                    {name: '深圳', value: 3},
+                    {name: '苏州', value: 4},
+                    {name: '香港', value: 5},
+                ]
+            },2000)
+        }
+
         public $refs!: {
             form: HTMLFormElement,
         };
         public itemOption: object = {
             label: {flex: 3},
             wrapper: {flex: 5},
+            tipMessageColor: 'red'
+            // height: 100
         };
+
 
         handleSubmit() {
             this.$refs.form.validate((valid: boolean) => {
-                console.log("handleSubmit", this.formValidate)
+                console.log("handleSubmit",valid, this.formValidate)
             })
         }
 
@@ -304,6 +376,11 @@
 </script>
 
 <style lang="scss">
+    .show {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
     html, body {
         height: 100%;
     }

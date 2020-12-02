@@ -1,6 +1,6 @@
 {
   "name": "april-ui",
-  "version": "0.1.6",
+  "version": "0.1.36",
   "author": "april <hesiyuetian@gmail.com>",
   "private": false,
   "scripts": {
@@ -10,7 +10,8 @@
     "build:theme-w": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
     "theme": "gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
     "theme:symbel": "gulp build --gulpfile packages/theme-chalk/gulpfile.js",
-    "libs": "vue-cli-service build --mode production --dest lib --target lib --name april-ui ./src/index.ts"
+    "libs:dev": "vue-cli-service build --mode development --dest lib --target lib --name april-ui ./src/index.ts",
+    "libs:prod": "vue-cli-service build --mode production --dest lib --target lib --name april-ui ./src/index.ts"
   },
   "main": "lib/april-ui.umd.min.js",
   "typings": "types/index.d.ts",

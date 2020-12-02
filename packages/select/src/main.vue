@@ -1,7 +1,8 @@
 <template>
-    <div style="height: 100%">
+    <div :style="{'height': style.height || '100%','width': style.width || '100%'}">
         <input  class="april-input-item"
-                :style="{'font-size': fontSize+'px', 'color': color, 'background-color': backgroundColor}"
+                style="vertical-align: top"
+                :style="{...style}"
                 :class="[valida.validateState === 'error' && 'april-has-error', disable ? 'april-input-disable' : 'april-input april-f-cursor' ]"
                 :type="type"
                 :readonly="!filterable"
@@ -24,12 +25,23 @@
         name: 'april-select',
         componentName: 'april-select',
         mixins: [Emitter],
-        inject: ["valida"],
+        inject: {
+            valida: {
+                default: ''
+            }
+        },
+        provide() {
+            return {
+                'select': this
+            };
+        },
         components: {
             AprilSelectOption
         },
+
         data(){
             return {
+                isSearch: false,
                 currentValue:'',
                 optionList: [],
             }
@@ -41,6 +53,10 @@
             type: {
                 type: String,
                 default: 'text'
+            },
+            style: {
+                type: Object,
+                default: () => { return {} }
             },
             placeholder: {
                 type: String,
@@ -62,26 +78,13 @@
             },
             filterMethod: {
                 type: Function,
-                default: () => {}
+                default: (value,that) => {
+                    that.optionList = that.list.filter(ele => ele.name.indexOf(value) != -1)
+                }
             },
             list: {
                 type: Array,
                 default: []
-            },
-
-            color: {
-                type: String,
-                default: 'rgba(0,0,0,.65)'
-            },
-
-            backgroundColor: {
-                type: String,
-                default: '#fff'
-            },
-
-            fontSize: {
-                type: [String, Number],
-                default: '14'
             },
 
             activeBackgroundColor: {
@@ -102,6 +105,10 @@
             list: {
                 handler(val) {
                     this.optionList = val;
+                    if(!this.currentValue && !this.isSearch){
+                        const rus = this.list.filter(ele => ele.value === this.value);
+                        this.currentValue = rus.length > 0 ? rus[0].name : ''
+                    }
                 },
                 immediate: true
             },
@@ -114,28 +121,34 @@
             }
         },
 
+        beforeDestroy() {
+            const domList = document.getElementsByClassName('april-select-option')
+            for(var k = 0 ; k < domList.length ; k++ ){
+                domList[k].parentNode.removeChild(domList[k])
+            }
+        },
+
         methods: {
             handleInput (event) {
                 if(!this.disable && this.filterable){
                     const value = event.target.value;
                     this.currentValue = value;
-
-                    if(this.filterMethod){
-                        this.filterMethod(value)
-                    }else{
-                        this.optionList = this.list.filter(ele => ele.name.indexOf(value) != -1)
-                    }
+                    this.filterMethod(value, this)
                 }
             },
             handleBlur () {
                 setTimeout(() => {
+                    this.isSearch = false;
+                    const rus = this.list.filter(ele => ele.value === this.value);
+                    this.currentValue = rus.length > 0 ? rus[0].name : '';
                     this.broadcast('april-select-option', 'hidden', false);
                     this.dispatch('april-form-item', 'on-form-blur', this.currentValue);
                 },200)
             },
-
             handleFocus(){
+                this.isSearch = true;
                 const dom = this.$el.getBoundingClientRect();
+                this.optionList = this.list;
                 const option = {
                     width: dom.width,
                     top: (dom.top || 0) + (document.documentElement.scrollTop || 0) + dom.height + 10 ,
@@ -143,12 +156,13 @@
                 };
                 this.broadcast('april-select-option', 'show', option);
             },
-
             select(data){
-                const value = data ? data.value : '';
-                this.currentValue = data ? data.name : '';
-                this.$emit('input', value);
-                this.dispatch('april-form-item', 'on-form-change', value);
+                if(data){
+                    const value = data ? data.value : '';
+                    this.currentValue = data ? data.name : '';
+                    this.$emit('input', value);
+                    this.dispatch('april-form-item', 'on-form-change', value);
+                }
             }
         },
     }

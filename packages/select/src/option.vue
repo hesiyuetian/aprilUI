@@ -1,6 +1,6 @@
 <template>
     <div class="april-select-option" v-if="visible">
-        <ul class="april-select-c" :style="{'width': option.width + 'px', 'top': option.top+'px', 'left': option.left+'px', 'background': selectBackgroundColor, 'color': selectColor}">
+        <ul class="april-select-c" :style="{'width': option.width + 'px', 'top': option.top+'px', 'left': option.left+'px', 'background': selectBackgroundColor, 'color': selectColor}" v-clickoutside="clickHide">
             <li @click.stop="set()" v-if="isShowDefalut">
                 <span>{{defalutFont}}</span>
             </li>
@@ -13,10 +13,13 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue, Prop, Emit, Watch } from "vue-property-decorator";
-
+    import {Component, Vue, Prop} from "vue-property-decorator";
+    import clickoutside from '../../directives/index'
     @Component({
-        name: 'april-select-option'
+        name: 'april-select-option',
+        directives:{
+            clickoutside
+        },
     })
     export default class AprilSelectOption extends Vue {
         dispatch: any;
@@ -39,6 +42,8 @@
         @Prop({default: "#fff", type: String}) public selectBackgroundColor!: String;
         @Prop({default: "#bae7ff", type: String}) public activeBackgroundColor!: String;
 
+
+
         private option: object = {
             width: '',
             top: '',
@@ -56,23 +61,21 @@
                     body.appendChild(this.$el);
                 }
 
-                this.$on('hidden', (option:any) => {
-                    this.visible = false;
-                });
+                // this.$on('hidden', (option:any) => {
+                //     this.visible = false;
+                // });
 
                 this.$on('show', (option:any) => {
-                    body.addEventListener('click', (event:any) => {
-                        if(that.visible){
-                            this.visible = false;
-                            this.filterable && this.$emit('select');
-                        }
-                    });
-                    setTimeout(() => {
+                    // setTimeout(() => {
                         this.visible = true;
                         this.option = option;
-                    },200)
+                    // },200)
                 });
             });
+        }
+
+        clickHide(e:any) {
+            this.visible = false;
         }
 
         set(item:any){

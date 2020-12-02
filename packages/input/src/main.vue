@@ -2,12 +2,15 @@
     <input
             class="april-input-item"
             :class="[valida.validateState === 'error' && 'april-has-error', disable ? 'april-input-disable' : 'april-input' ]"
-            :style="{'font-size': fontSize+'px', 'color': color, 'background-color': backgroundColor}"
+            :style="{...style}"
             :type="type"
             :placeholder="placeholder"
             :readonly="disable"
             :value="currentValue"
             @input="handleInput"
+            @keyup="handleKeyup"
+            @keydown="handleKeydown"
+            @keypress="handleKeypress"
             @blur="handleBlur"
     />
 </template>
@@ -19,7 +22,12 @@
         name: 'april-input',
         componentName: 'april-input',
         mixins: [Emitter],
-        inject: ["valida"],
+        inject: {
+            valida: {
+                default: ''
+            }
+        },
+        inheritAttrs: false,
         data(){
             return {
                 currentValue:''
@@ -36,22 +44,14 @@
             placeholder: {
                 type: String,
             },
+            style: {
+                type: Object,
+                default: () => { return {} }
+            },
             disable: {
                 type: Boolean,
                 default: false
             },
-            color: {
-                type: String,
-                default: 'rgba(0,0,0,.65)'
-            },
-            backgroundColor: {
-                type: String,
-                default: '#fff'
-            },
-            fontSize: {
-                type: [String, Number],
-                default: '14'
-            }
         },
         watch: {
             value: {
@@ -64,6 +64,18 @@
         },
 
         methods: {
+            handleKeyup (event){
+                const value = event.target.value;
+                this.$emit('keyup', value);
+            },
+            handleKeydown (event){
+                const value = event.target.value;
+                this.$emit('keydown', value);
+            },
+            handleKeypress (event){
+                const value = event.target.value;
+                this.$emit('keypress', value);
+            },
             handleInput (event) {
                 const value = event.target.value;
                 this.currentValue = value;

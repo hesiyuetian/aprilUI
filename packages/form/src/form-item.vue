@@ -1,12 +1,13 @@
 <template>
-    <div class="april-form-item">
+    <div class="april-form-item" :style="{height: (itemOption.height || 40) +'px',lineHeight: (itemOption.height || 40) +'px', paddingBottom: (itemOption.paddingBottom || 26) +'px', ...style}">
         <label class="april-form-item-label" v-if="label"  :style="{'flex': itemOption.label.flex}">
             <span :class="{'april-form-item-required': isRequired }">{{ label }}：</span>
         </label>
         <div class="april-form-item-wrapper" :style="{'flex': itemOption.wrapper.flex}">
             <slot></slot>
             <transition name="fade">
-                <div class="april-form-item-wrapper-message" v-if="validateState === 'error' && validateMessage">{{ validateMessage }}</div>
+                <div class="april-form-item-wrapper-message" v-if="validateState === 'error' && validateMessage" v-html="validateMessage"></div>
+                <div class="april-form-item-wrapper-message april-form-item-wrapper-tip" v-else-if="tipMessage" v-html="tipMessage"></div>
             </transition>
         </div>
     </div>
@@ -35,15 +36,22 @@
             }
         },
         props: {
+            tipMessage: {
+                type: String,
+            },
             label: {
                 type: [String, Number],
+            },
+            style: {
+                type: Object,
+                default: () => { return {} }
             },
             prop: {
                 type: String,
             },
             itemOption: {
                 type: Object,
-                default: { label: { flex: 3 },wrapper: { flex: 5 }}
+                default: () => { return { label: { flex: 3 },wrapper: { flex: 5 }, height: 40, paddingBottom: 26 } }
             }
         },
         computed: {
@@ -126,6 +134,7 @@
                 let model = {};
 
                 model[this.prop] = this.fieldValue;
+
 
                 validator.validate(model, { firstFields: true }, (errors) => {
                     this.validateState = !errors ? 'success' : 'error';

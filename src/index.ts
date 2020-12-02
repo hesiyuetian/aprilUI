@@ -1,7 +1,7 @@
 import Vue from 'vue';
-
 import AprilPicker from '../packages/picker';
 import AprilPagination from '../packages/pagination';
+
 
 // 关闭 Vue warn
 Vue.config.warnHandler = function(msg, vm, trace) {
@@ -15,6 +15,7 @@ import {AprilModelCenter, AprilModelRight} from '../packages/model';
 import {AprilForm, AprilFormItem} from '../packages/form';
 import AprilInput from '../packages/input';
 import AprilSelect from '../packages/select';
+import AprilDatePicker from '../packages/date';
 
 const components: { [propsName: string]: any } = {
     AprilPicker,
@@ -24,7 +25,8 @@ const components: { [propsName: string]: any } = {
     AprilForm,
     AprilFormItem,
     AprilInput,
-    AprilSelect
+    AprilSelect,
+    AprilDatePicker
 };
 
 const install = (vue: typeof Vue): void => {

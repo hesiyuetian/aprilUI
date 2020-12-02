@@ -12,11 +12,15 @@ export declare class AprilSelect extends Vue {
     // 当前绑定的值
     public value: any;
 
+    // select样式
+    public style: object;
+
     // input输入类型
     public type: string;
 
     // 是否展示默认选则项
     public isShowDefalut: number;
+
     // 展示默认选则项,默认项的文案
     public defalutFont: string;
 
@@ -34,15 +38,6 @@ export declare class AprilSelect extends Vue {
     // 提示文案
     public placeholder: string;
 
-    // 字体颜色
-    public color: string;
-
-    // input背景颜色
-    public backgroundColor: string;
-
-    // 字体大小 不带单位
-    public fontSize: string;
-
     // 激活的选线背景颜色
     public activeBackgroundColor: string;
 
@@ -51,4 +46,5 @@ export declare class AprilSelect extends Vue {
 
     // 选择列表的背景颜色
     public selectBackgroundColor: string;
+
 }
